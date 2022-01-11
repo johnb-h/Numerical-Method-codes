@@ -2,6 +2,19 @@
 #1.Jacobi Iterative Method
 #2.Gaus-seidel Iterative Method
 #3.Successive Over Relaxation Method
+#There is also extra functions:
+#spec_rad - finds spectral radius of an iterative matrix
+#infinity_norm - finds infinity norm of two vectors of a given dim
+#independance - use to confirm if you believe a matrix is not consistently ordered
+#omega_find - finds a numerical approximations for an optimal omega to be used in successive over relaxation method. Additionally gives a graphical output.
+
+####################################
+
+#In this code we are considering a set of equations in the form
+#Ax = b, where A is a nxn matrix and x,b are nx1 matrices(n-dim vectors)
+#A = D - L - U, where D is a diagonal matrix, L and U are lower and upper triangular matrices respectivly
+
+####################################
 
 #import required libraries
 from matplotlib.pylab import *
@@ -10,9 +23,9 @@ import numpy as np
 from math import *
 
 #Note SR stands for successive relaxation 
-###################################
+####################################
 ###Iteration matrices and methods###
-###################################
+####################################
 
 #Jacobi Iterative method
 
@@ -24,7 +37,7 @@ def Jacobi(x, B_J, B, D):
 def B_J(D, L, U):
     return(np.dot(np.linalg.inv(D),(L+U)))
     
-###################################
+####################################
 
 #Successive relaxation method
 #note setting omega = 1 yeilds Gauss-Siedel Method
@@ -37,9 +50,9 @@ def B_SR(D, L, U, omega):
 def SR(x, B, D, L, B_SR, omega):
     return(np.dot(B_SR, x)+np.dot(np.linalg.inv(D-(omega*L)),omega*B))
 
-###################################
+####################################
 #Functions used in analysis of program 
-###################################
+####################################
 
 #Spectral Radius function
 def spec_rad(B, JAC):#Inputs a matrix as parameter and JAC if wanting eigenvalues of Jacobian outputted
@@ -53,7 +66,7 @@ def spec_rad(B, JAC):#Inputs a matrix as parameter and JAC if wanting eigenvalue
     return(abs(max(eigs)))#returns the max absolute eigenvalue, ie the spectral radius
 
 #Infinity norm for ||v1-v2||
-def error(v1, v2, dim):#takes parameters of 2 vectors and the dimension of the vectors
+def infinity_norm(v1, v2, dim):#takes parameters of 2 vectors and the dimension of the vectors
     j = 0#dummy variable to index elements
     err_arr = np.array([])#creates an empty array 
     while j < dim:#loops for the size of the vecotrs so all elements are compared 
@@ -62,7 +75,7 @@ def error(v1, v2, dim):#takes parameters of 2 vectors and the dimension of the v
     return(max(err_arr))#finds the infinity norm by taking max of err_arr 
 
 #Consistently ordered tester (To prove NOT consistently ordered if suspected)
-def independance(D,L,U):
+def consist_ordered(D,L,U):
     a = 1#a = 1 is Jacobi iteration matrix
     C1 = np.array(a*(np.dot(np.linalg.inv(D),L))+((1/a)*np.dot(np.linalg.inv(D),U)))#first matrix to find eigvals from
     a = 100
