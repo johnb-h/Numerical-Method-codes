@@ -2,11 +2,30 @@
 #Methods:
 #1.Interpolating polynomial with equally spaced points sampled
 #2.Interpolating polynomial with chebyshev points sampled
-#3.Cubic spline
+#3.Cubic spline with equally spaced points
+#Additionally there is extra functions which can be used to comment on the interpolating approximations used
+#polyprint - prints the inteprolating polynomial with the coefficients and dummy variable x
+#max_prod - finds the maximum product of (x-x0)..(x-xn) for a set of points x0,...,xn and x is an element of an interval [a,b]
+#max_fn - finds the maximum value of the nth derrivative of a function on an interval [a,b]
+#max_theoretical_error - calculates what the theoretical worst possible error could be for an approximation of f using x0,...,xn points on an interval [a,b]
+#max_error - calculates an estimation for the actual maximum error for f using the points x0,...,xn on an interval [a,b]
+
 ##################################
 
+#In this code a function will have to be defined using:
+#def f(x):
+#return(the function)
+#A interval [a,b] to which we want to consider the function
+#Number of points to be sampled n/the degree of the polynomial to be found
 
+#To use the functions to find the interpolating polynomial and print to screen you would use:
+#polyprint(degree of polynomial, inter_poly_coeff(points sampled, degree of polynomial, function))
+#if you wanted equally spaced points use command: linspace(a,b,degree of polynomial+1)
+#if you wanted to use chebyshev points you would use the command chebyshev(degree of polynomial,a,b)
+#in space of points sampled
 
+#For cubic splines 
+#h = (b-a)/n when using equally spaced points
 ##################################
 
 #Import required libraries
